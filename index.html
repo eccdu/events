@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ইভেন্ট রেজিস্ট্রেশন | Economics Cultural Club</title>
+  <title>ইভেন্ট রেজিস্ট্রেশন পোর্টাল | Economics Cultural Club</title>
   
   <!-- Fonts: Kalpurush & Hind Siliguri -->
   <link rel="preconnect" href="https://fonts.maateen.me">
@@ -27,66 +27,17 @@
           <div class="brand-subtitle">Department of Economics, University of Dhaka</div>
         </div>
       </div>
-
-      <!-- User Account Bar (Shown when authenticated) -->
-      <div id="user-account-bar" class="user-account-bar" style="display: none;">
-        <div class="user-profile">
-          <img id="header-avatar" class="user-avatar" src="" alt="User Avatar" />
-          <div class="user-details">
-            <span id="header-user-name" class="user-name">User Name</span>
-            <span id="header-user-email" class="user-email">user@gmail.com</span>
-          </div>
-        </div>
-        <button type="button" class="btn-signout" id="btn-signout">লগআউট</button>
-      </div>
     </div>
   </header>
 
   <!-- Main Container -->
   <main class="main-content">
-
-    <!-- VIEW 1: AUTHENTICATION (EMAIL LOGIN) -->
-    <section id="view-auth" class="view-section active">
-      <div class="auth-container">
-        <div class="auth-header">
-          <div class="auth-logo-wrapper">
-            <img src="ecc-logo.png" alt="ECC Logo" class="auth-logo-img" />
-          </div>
-          <h1>ইমেইল দিয়ে লগ ইন করুন</h1>
-          <p>রেজিস্ট্রেশনের জন্য আপনার নাম ও ইমেইল প্রদান করুন।</p>
-        </div>
-
-        <form id="form-auth-login" novalidate style="margin-top: 16px; text-align: left;">
-          <div class="form-group" style="margin-bottom: 14px;">
-            <label class="form-label" for="auth-input-name">
-              <span>আপনার পূর্ণ নাম (Full Name) *</span>
-            </label>
-            <input type="text" id="auth-input-name" class="form-control" required placeholder="উদাহরণ: তানভীর হোসেন" />
-          </div>
-
-          <div class="form-group" style="margin-bottom: 20px;">
-            <label class="form-label" for="auth-input-email">
-              <span>ইমেইল এড্রেস (Email Address) *</span>
-            </label>
-            <input type="email" id="auth-input-email" class="form-control" required placeholder="your.name@gmail.com" />
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-full">
-            লগইন করে এগিয়ে যান &rarr;
-          </button>
-        </form>
-
-        <p class="auth-note">
-          আপনার প্রদত্ত নাম ও ইমেইল স্বয়ংক্রিয়ভাবে ফর্মের সাথে সংযুক্ত হয়ে ক্লাবের ডাটাবেজে সংরক্ষিত হবে।
+    <section class="view-section active">
+      <div class="menu-header" style="text-align: center; margin-bottom: 36px;">
+        <h2 style="font-size: 28px; margin-bottom: 8px;">ইভেন্ট রেজিস্ট্রেশন পোর্টাল</h2>
+        <p style="font-size: 16px; max-width: 600px; margin: 0 auto;">
+          ইকোনমিক্স কালচারাল ক্লাবের আসন্ন ইভেন্টসমূহ। আপনি যে ইভেন্টে অংশগ্রহণ করতে চান তার রেজিস্ট্রেশন বাটনে ক্লিক করুন।
         </p>
-      </div>
-    </section>
-
-    <!-- VIEW 2: MAIN MENU (SELECTION) -->
-    <section id="view-menu" class="view-section">
-      <div class="menu-header">
-        <h2 id="menu-welcome-text">স্বাগতম!</h2>
-        <p>যে ইভেন্টে অংশগ্রহণ করতে চান তা নির্বাচন করুন:</p>
       </div>
 
       <div class="events-grid">
@@ -105,9 +56,9 @@
               <li><strong>সময়:</strong> সকাল ০৮:৩০ মিনিট</li>
             </ul>
           </div>
-          <button type="button" class="btn btn-accent btn-full" id="btn-open-art-camp">
+          <a href="artcamp/" class="btn btn-accent btn-full" style="text-decoration: none;">
             'চিত্রপট' বুকিং ফর্ম খুলুন &rarr;
-          </button>
+          </a>
         </article>
 
         <!-- Event 2: Movie Screening 'উৎসব' -->
@@ -124,425 +75,18 @@
               <li><strong>সময়:</strong> দুপুর ০১:০০টা</li>
             </ul>
           </div>
-          <button type="button" class="btn btn-primary btn-full" id="btn-open-movie-screening">
+          <a href="movies/" class="btn btn-primary btn-full" style="text-decoration: none;">
             'উৎসব' বুকিং ফর্ম খুলুন &rarr;
-          </button>
+          </a>
         </article>
       </div>
     </section>
-
-    <!-- VIEW 3: FORM 1 - 'চিত্রপট' (Art-camp) -->
-    <section id="view-art-camp" class="view-section">
-      <div class="form-card">
-        <div class="form-top-nav">
-          <button type="button" class="btn-back" data-target="view-menu">
-            &larr; প্রধান মেনুতে ফিরে যান
-          </button>
-          <span class="event-tag">Art-camp Booking</span>
-        </div>
-
-        <div class="form-title-group">
-          <h2>'চিত্রপট' (Art-camp) বুকিং ফর্ম</h2>
-          <p>সঠিক বয়স ও জন্মতারিখ প্রদান করে উপযুক্ত গ্রুপ নির্বাচন করুন।</p>
-        </div>
-
-        <form id="form-art-camp" novalidate>
-          <div class="form-grid form-grid-2">
-            <!-- Name -->
-            <div class="form-group">
-              <label class="form-label" for="ac-name">
-                <span>অংশগ্রহণকারীর নাম (Full Name) *</span>
-              </label>
-              <input type="text" id="ac-name" name="name" class="form-control" required placeholder="পুরো নাম লিখুন" />
-            </div>
-
-            <!-- Gender (পুরুষ, মহিলা, তৃতীয় লিঙ্গ) -->
-            <div class="form-group">
-              <label class="form-label" for="ac-gender">
-                <span>লিঙ্গ (Gender) *</span>
-              </label>
-              <select id="ac-gender" name="gender" class="form-control" required>
-                <option value="">নির্বাচন করুন</option>
-                <option value="পুরুষ">পুরুষ</option>
-                <option value="মহিলা">মহিলা</option>
-                <option value="তৃতীয় লিঙ্গ">তৃতীয় লিঙ্গ</option>
-              </select>
-            </div>
-
-            <!-- Phone Number -->
-            <div class="form-group">
-              <label class="form-label" for="ac-phone">
-                <span>ফোন নম্বর (Phone Number) *</span>
-                <span class="label-sub">নাবালক হলে অভিভাবকের নম্বর</span>
-              </label>
-              <input type="tel" id="ac-phone" name="phoneNumber" class="form-control" required placeholder="01XXXXXXXXX" />
-            </div>
-
-            <!-- Birthday -->
-            <div class="form-group">
-              <label class="form-label" for="ac-birthday">
-                <span>জন্মতারিখ (Birthday) *</span>
-              </label>
-              <input type="date" id="ac-birthday" name="birthday" class="form-control" required />
-            </div>
-
-            <!-- Age (Auto-calculated, Read-only) -->
-            <div class="form-group">
-              <label class="form-label" for="ac-age">
-                <span>বয়স (Age)</span>
-                <span class="label-sub">জন্মতারিখ থেকে স্বয়ংক্রিয়ভাবে নির্ধারিত</span>
-              </label>
-              <div class="age-input-wrapper">
-                <input type="text" id="ac-age" name="age" class="form-control tabular-nums" readonly placeholder="জন্মতারিখ নির্বাচন করুন" />
-                <span id="ac-age-badge" class="age-status-badge">অনির্ধারিত</span>
-              </div>
-            </div>
-
-            <!-- Registration Fee (Auto-filled, Read-only) -->
-            <div class="form-group">
-              <label class="form-label" for="ac-fee">
-                <span>রেজিস্ট্রেশন ফি (Registration Fee)</span>
-                <span class="label-sub">গ্রুপ অনুযায়ী নির্ধারিত</span>
-              </label>
-              <input type="text" id="ac-fee" name="feeDisplay" class="form-control tabular-nums" readonly value="০ টাকা" style="font-weight: 700; color: var(--color-primary);" />
-            </div>
-
-            <!-- Group Selection -->
-            <div class="form-group full-width">
-              <label class="form-label">
-                <span>গ্রুপ নির্বাচন (Select Group) *</span>
-                <span class="label-sub" id="ac-group-helper">বয়স অনুযায়ী প্রযোজ্য গ্রুপ সচল হবে</span>
-              </label>
-
-              <div class="group-options">
-                <!-- Group 1: কুঁড়ি -->
-                <div class="group-card disabled" id="group-card-kuri" data-group="কুঁড়ি" data-medium="কার্ট্রিজ পেপার (Cartridge Paper)" data-fee="500" data-min-age="3" data-max-age="15">
-                  <div class="group-card-header">
-                    <span class="group-title">কুঁড়ি</span>
-                    <span class="group-age-badge">৩–১৫ বছর</span>
-                  </div>
-                  <div class="group-meta">
-                    মাধ্যম: কার্ট্রিজ পেপার (Cartridge Paper)
-                  </div>
-                  <div class="group-fee">৫০০ টাকা (500 TK)</div>
-                </div>
-
-                <!-- Group 2: কলি (কার্টিজ পেপার) -->
-                <div class="group-card disabled" id="group-card-koli-paper" data-group="কলি (কার্টিজ পেপার)" data-medium="কার্ট্রিজ পেপার (Cartridge Paper)" data-fee="800" data-min-age="16" data-max-age="25">
-                  <div class="group-card-header">
-                    <span class="group-title">কলি</span>
-                    <span class="group-age-badge">১৬–২৫ বছর</span>
-                  </div>
-                  <div class="group-meta">
-                    মাধ্যম: কার্ট্রিজ পেপার (Cartridge Paper)
-                  </div>
-                  <div class="group-fee">৮০০ টাকা (800 TK)</div>
-                </div>
-
-                <!-- Group 3: কলি (ক্যানভাস) -->
-                <div class="group-card disabled" id="group-card-koli-canvas" data-group="কলি (ক্যানভাস)" data-medium="ক্যানভাস (Canvas)" data-fee="1000" data-min-age="16" data-max-age="25">
-                  <div class="group-card-header">
-                    <span class="group-title">কলি</span>
-                    <span class="group-age-badge">১৬–২৫ বছর</span>
-                  </div>
-                  <div class="group-meta">
-                    মাধ্যম: ক্যানভাস (Canvas)
-                  </div>
-                  <div class="group-fee">১,০০০ টাকা (1,000 TK)</div>
-                </div>
-              </div>
-              <input type="hidden" id="ac-selected-group" name="group" required />
-              <input type="hidden" id="ac-selected-medium" name="medium" />
-              <input type="hidden" id="ac-selected-fee" name="fee" value="0" />
-            </div>
-          </div>
-
-          <!-- Shared Payment Component Container -->
-          <div class="payment-component-container" data-form-prefix="ac"></div>
-
-          <!-- Submit Button -->
-          <div style="margin-top: 24px;">
-            <button type="submit" class="btn btn-primary btn-full" id="btn-submit-art-camp">
-              <span class="btn-text">'চিত্রপট' রেজিস্ট্রেশন সম্পন্ন করুন</span>
-              <span class="btn-spinner" style="display: none;">প্রসেস হচ্ছে...</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <!-- VIEW 4: FORM 2 - 'উৎসব' (Movie Screening) -->
-    <section id="view-movie-screening" class="view-section">
-      <div class="form-card">
-        <div class="form-top-nav">
-          <button type="button" class="btn-back" data-target="view-menu">
-            &larr; প্রধান মেনুতে ফিরে যান
-          </button>
-          <span class="event-tag">
-            Movie Screening Booking
-          </span>
-        </div>
-
-        <div class="form-title-group">
-          <h2>'উৎসব' (Movie Screening) বুকিং ফর্ম</h2>
-          <p>আপনার তথ্য, ডিপার্টমেন্ট ও সেশন অনুযায়ী ফি স্বয়ংক্রিয়ভাবে নির্ধারিত হবে।</p>
-        </div>
-
-        <form id="form-movie-screening" novalidate>
-          <div class="form-grid form-grid-2">
-            <!-- Name -->
-            <div class="form-group">
-              <label class="form-label" for="ms-name">
-                <span>নাম (Full Name) *</span>
-              </label>
-              <input type="text" id="ms-name" name="name" class="form-control" required placeholder="পুরো নাম লিখুন" />
-            </div>
-
-            <!-- Gender (পুরুষ, মহিলা, তৃতীয় লিঙ্গ) -->
-            <div class="form-group">
-              <label class="form-label" for="ms-gender">
-                <span>লিঙ্গ (Gender) *</span>
-              </label>
-              <select id="ms-gender" name="gender" class="form-control" required>
-                <option value="">নির্বাচন করুন</option>
-                <option value="পুরুষ">পুরুষ</option>
-                <option value="মহিলা">মহিলা</option>
-                <option value="তৃতীয় লিঙ্গ">তৃতীয় লিঙ্গ</option>
-              </select>
-            </div>
-
-            <!-- Phone Number -->
-            <div class="form-group full-width">
-              <label class="form-label" for="ms-phone">
-                <span>ফোন নম্বর (Phone Number) *</span>
-                <span class="label-sub">নাবালক হলে অভিভাবকের নম্বর (Guardian's if Minor)</span>
-              </label>
-              <input type="tel" id="ms-phone" name="phoneNumber" class="form-control" required placeholder="01XXXXXXXXX" />
-            </div>
-
-            <!-- Institution Dropdown -->
-            <div class="form-group">
-              <label class="form-label" for="ms-institution">
-                <span>প্রতিষ্ঠান / বিভাগ (Institution) *</span>
-              </label>
-              <select id="ms-institution" name="institution" class="form-control" required>
-                <option value="">নির্বাচন করুন</option>
-                <option value="EconDU">EconDU (Department of Economics, DU)</option>
-                <option value="Other">অন্যান্য (Other)</option>
-              </select>
-            </div>
-
-            <!-- Institution Other (Conditional Input) -->
-            <div class="form-group" id="ms-institution-other-group" style="display: none;">
-              <label class="form-label" for="ms-institution-other">
-                <span>প্রতিষ্ঠানের নাম লিখুন (Specify Institution) *</span>
-              </label>
-              <input type="text" id="ms-institution-other" name="institutionOther" class="form-control" placeholder="আপনার প্রতিষ্ঠান বা বিভাগের নাম" />
-            </div>
-
-            <!-- Session Dropdown -->
-            <div class="form-group">
-              <label class="form-label" for="ms-session">
-                <span>সেশন (Session) *</span>
-              </label>
-              <select id="ms-session" name="session" class="form-control" required>
-                <option value="">নির্বাচন করুন</option>
-                <option value="25/26">25/26</option>
-                <option value="24/25">24/25</option>
-                <option value="23/24">23/24</option>
-                <option value="22/23">22/23</option>
-                <option value="Other">অন্যান্য (Other)</option>
-              </select>
-            </div>
-
-            <!-- Session Other (Conditional Input) -->
-            <div class="form-group" id="ms-session-other-group" style="display: none;">
-              <label class="form-label" for="ms-session-other">
-                <span>সেশন উল্লেখ করুন (Specify Session) *</span>
-              </label>
-              <input type="text" id="ms-session-other" name="sessionOther" class="form-control" placeholder="যেমন: 21/22 বা অন্যান্য" />
-            </div>
-
-            <!-- Registration Fee (Auto-filled, Read-only) -->
-            <div class="form-group full-width">
-              <div class="fee-summary-box">
-                <div>
-                  <div class="fee-summary-label">রেজিস্ট্রেশন ফি (Registration Fee)</div>
-                  <div class="fee-summary-note" id="ms-fee-rule-note">
-                    EconDU এবং [25/26, 24/25, 23/24, 22/23] সেশনের জন্য ৫০ টাকা, অন্যদের জন্য ১০০ টাকা।
-                  </div>
-                </div>
-                <div class="fee-summary-val" id="ms-fee-display">১০০ টাকা</div>
-                <input type="hidden" id="ms-fee" name="fee" value="100" />
-              </div>
-            </div>
-          </div>
-
-          <!-- Shared Payment Component Container -->
-          <div class="payment-component-container" data-form-prefix="ms"></div>
-
-          <!-- Submit Button -->
-          <div style="margin-top: 24px;">
-            <button type="submit" class="btn btn-primary btn-full" id="btn-submit-movie-screening">
-              <span class="btn-text">'উৎসব' রেজিস্ট্রেশন সাবমিট করুন</span>
-              <span class="btn-spinner" style="display: none;">প্রসেস হচ্ছে...</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-
   </main>
-
-  <!-- Reusable Template: Payment Details Shared Component -->
-  <template id="template-payment-details">
-    <div class="payment-section">
-      <div class="section-title">পেমেন্ট সংক্রান্ত বিবরণ (Payment Details)</div>
-      <div class="section-desc">
-        নিচের ব্যাংক একাউন্ট অথবা MFS নম্বরে নির্ধারিত ফি পাঠিয়ে নিচের তথ্যগুলো পূরণ করুন।
-      </div>
-
-      <div class="payment-grid">
-        <!-- Bank Details -->
-        <div class="payment-card">
-          <div class="payment-card-title">
-            <span>ব্যাংক একাউন্ট বিবরণ (Bank)</span>
-          </div>
-          <div class="payment-details-list">
-            <div class="payment-row">
-              <span>Account Name:</span>
-              <span>Economics Cultural Club</span>
-            </div>
-            <div class="payment-row">
-              <span>Account No:</span>
-              <span>
-                <button type="button" class="copy-pill js-copy-btn" data-copy="4405702001651" title="কপি করুন">
-                  4405702001651 📋
-                </button>
-              </span>
-            </div>
-            <div class="payment-row">
-              <span>Bank Name:</span>
-              <span>Sonali Bank PLC</span>
-            </div>
-            <div class="payment-row">
-              <span>Branch:</span>
-              <span>DU Campus Corporate</span>
-            </div>
-            <div class="payment-row">
-              <span>Routing No:</span>
-              <span>200271750</span>
-            </div>
-            <div class="payment-row">
-              <span>SWIFT / BIC:</span>
-              <span>BSONBDDH</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- MFS Details -->
-        <div class="payment-card">
-          <div class="payment-card-title">
-            <span>মোবাইল ব্যাংকিং (MFS)</span>
-          </div>
-          <div class="payment-details-list">
-            <div class="payment-row">
-              <span>MFS Providers:</span>
-              <span>bKash / Nagad / Rocket / Upay</span>
-            </div>
-            <div class="payment-row" style="margin-top: 4px;">
-              <span>MFS Number:</span>
-              <span>
-                <button type="button" class="copy-pill js-copy-btn" data-copy="01753932582" title="কপি করুন">
-                  01753932582 📋
-                </button>
-              </span>
-            </div>
-            <div class="payment-row" style="margin-top: 6px;">
-              <span style="font-size: 12px; color: var(--color-text-muted);">
-                * সেন্ড মানি বা ক্যাশ-ইন সম্পন্ন করে নিচে পেমেন্ট নম্বর ও ট্রানজেকশন আইডি দিন।
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- QR Code Display -->
-        <div class="qr-container">
-          <div class="qr-image-wrapper">
-            <img src="bangla-qr.jpg" alt="Bangla QR" onerror="this.onerror=null; this.src='bangla-qr.png';" />
-          </div>
-          <div class="qr-caption">Bangla QR</div>
-        </div>
-      </div>
-
-      <!-- Verification Input fields: Payment Method, Payment Number, TrxID -->
-      <div class="verification-box">
-        <div class="form-grid form-grid-3">
-          <!-- 1. Payment Method -->
-          <div class="form-group">
-            <label class="form-label">
-              <span>পেমেন্ট মাধ্যম (Payment Method) *</span>
-            </label>
-            <select class="form-control js-payment-method" required>
-              <option value="bKash">bKash (বিকাশ)</option>
-              <option value="Nagad">Nagad (নগদ)</option>
-              <option value="Rocket">Rocket (রকেট)</option>
-              <option value="Upay">Upay (উপায়)</option>
-              <option value="Sonali Bank">Sonali Bank PLC (ব্যাংক ট্রান্সফার)</option>
-            </select>
-          </div>
-
-          <!-- 2. Payment Number -->
-          <div class="form-group">
-            <label class="form-label">
-              <span>পেমেন্ট নম্বর (Payment Number) *</span>
-            </label>
-            <input type="text" class="form-control js-payment-number" required placeholder="01XXXXXXXXX বা একাউন্ট নম্বর" />
-            <span class="label-sub" style="margin-top: 2px;">(যেই একাউন্ট থেকে টাকা পাঠিয়েছেন)</span>
-          </div>
-
-          <!-- 3. Transaction ID -->
-          <div class="form-group">
-            <label class="form-label">
-              <span>ট্রানজেকশন আইডি (TrxID) *</span>
-            </label>
-            <input type="text" class="form-control js-trx-id" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TrxID" />
-            <span class="label-sub" style="margin-top: 2px;">(যেমন: BKA892XKZ বা স্লিপ নম্বর)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <!-- Success Modal -->
-  <div id="modal-success" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-icon-success">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-      </div>
-      <h3 id="modal-success-title">রেজিস্ট্রেশন সাবমিট হয়েছে!</h3>
-      <p id="modal-success-desc">
-        ধন্যবাদ! আপনার রেজিস্ট্রেশন অনুরোধ আমরা সফলভাবে পেয়েছি।<br>
-        অনুগ্রহপূর্বক কনফার্মেশনের জন্য আপনার ইমেইল চেক করবেন।
-      </p>
-      <button type="button" class="btn btn-primary btn-full" id="btn-modal-done">
-        প্রধান মেনুতে ফিরে যান
-      </button>
-    </div>
-  </div>
-
-  <!-- Toast Container -->
-  <div id="toast-container" class="toast-container"></div>
 
   <!-- Footer -->
   <footer class="site-footer">
     <div>&copy; 2026 Economics Cultural Club, Department of Economics, University of Dhaka. All rights reserved.</div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="config.js"></script>
-  <script src="app.js"></script>
 </body>
 </html>
