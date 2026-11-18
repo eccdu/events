@@ -119,19 +119,9 @@ No Google Cloud Console, no API keys, and no billing accounts are required!
 
 ---
 
-### Step 4: Deploy to GitHub Pages (100% Free)
-1. Initialize git and push this folder to your GitHub repository:
-   ```bash
-   git init
-   git add .
-   git commit -m "Deploy ECC Registration Portal"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git push -u origin main
-   ```
-2. On GitHub, navigate to your repository &rarr; **Settings** &rarr; **Pages**.
-3. Under **Build and deployment**, set Source to **Deploy from a branch**, choose `main` branch and `/ (root)` folder, then click **Save**.
-4. In 1–2 minutes, your portal will be live at `https://<your-username>.github.io/<repo-name>/`.
+### Live Production Deployment
+- **Live Website:** https://eccdu.github.io/events/
+- **GitHub Repository:** https://github.com/eccdu/events
    git branch -M main
    git remote add origin https://github.com/<your-username>/<repo-name>.git
    git push -u origin main
