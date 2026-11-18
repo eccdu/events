@@ -100,8 +100,8 @@ function handleArtCampSubmission(data, timestamp) {
   // Ensure headers exist
   const headers = [
     "Timestamp",
-    "Google Account Email",
-    "Google Account Name",
+    "User Email",
+    "User Name",
     "Participant Name",
     "Gender",
     "Phone (Guardian's if Minor)",
@@ -111,6 +111,7 @@ function handleArtCampSubmission(data, timestamp) {
     "Medium",
     "Fee (TK)",
     "Payment Method",
+    "Payment Number",
     "Transaction ID / Ref"
   ];
   ensureHeaders(sheet, headers);
@@ -129,6 +130,7 @@ function handleArtCampSubmission(data, timestamp) {
     data.medium || "",
     data.fee || 0,
     data.paymentMethod || "MFS / Bank",
+    data.paymentNumber ? "'" + data.paymentNumber : "",
     data.transactionId || ""
   ];
 
@@ -144,8 +146,8 @@ function handleMovieScreeningSubmission(data, timestamp) {
   // Ensure headers exist
   const headers = [
     "Timestamp",
-    "Google Account Email",
-    "Google Account Name",
+    "User Email",
+    "User Name",
     "Participant Name",
     "Gender",
     "Phone (Guardian's if Minor)",
@@ -155,6 +157,7 @@ function handleMovieScreeningSubmission(data, timestamp) {
     "Specified Session",
     "Fee (TK)",
     "Payment Method",
+    "Payment Number",
     "Transaction ID / Ref"
   ];
   ensureHeaders(sheet, headers);
@@ -173,6 +176,7 @@ function handleMovieScreeningSubmission(data, timestamp) {
     data.sessionOther || "",
     data.fee || 0,
     data.paymentMethod || "MFS / Bank",
+    data.paymentNumber ? "'" + data.paymentNumber : "",
     data.transactionId || ""
   ];
 

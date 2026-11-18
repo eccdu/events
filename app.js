@@ -477,6 +477,7 @@
     // Shared verification inputs inside Art Camp form
     const container = elements.formArtCamp.querySelector(".payment-component-container");
     const paymentMethod = container.querySelector(".js-payment-method").value;
+    const paymentNumber = container.querySelector(".js-payment-number").value.trim();
     const trxId = container.querySelector(".js-trx-id").value.trim();
 
     if (!name) return showToast("অনুগ্রহ করে অংশগ্রহণকারীর নাম লিখুন।", "error");
@@ -485,6 +486,7 @@
     if (!birthday || age === null) return showToast("সঠিক জন্মতারিখ দিন।", "error");
     if (age < 3 || age > 25) return showToast("বয়স ৩ থেকে ২৫ বছরের মধ্যে হতে হবে।", "error");
     if (!group) return showToast("অনুগ্রহ করে একটি অনুমোদিত গ্রুপ নির্বাচন করুন।", "error");
+    if (!paymentNumber) return showToast("অনুগ্রহ করে যে নম্বর থেকে টাকা পাঠিয়েছেন সেই পেমেন্ট নম্বরটি দিন।", "error");
     if (!trxId) return showToast("অনুগ্রহ করে পেমেন্ট ট্রানজেকশন আইডি (TrxID) লিখুন।", "error");
 
     const payload = {
@@ -500,13 +502,14 @@
       medium: medium,
       fee: fee,
       paymentMethod: paymentMethod,
+      paymentNumber: paymentNumber,
       transactionId: trxId
     };
 
     submitToBackend(payload, elements.btnSubmitArtCamp, () => {
-      elements.modalSuccessTitle.textContent = "‘চিত্রপট’ রেজিস্ট্রেশন সফল!";
-      elements.modalSuccessDesc.textContent =
-        `ধন্যবাদ ${name}! আপনার চিত্রপট আর্ট ক্যাম্পের রেজিস্ট্রেশন (গ্রুপ: ${group}, ফি: ${fee} টাকা) সফলভাবে রেকর্ড করা হয়েছে।`;
+      elements.modalSuccessTitle.textContent = "‘চিত্রপট’ রেজিস্ট্রেশন সাবমিট হয়েছে!";
+      elements.modalSuccessDesc.innerHTML =
+        `ধন্যবাদ <strong>${name}</strong>! আপনার রেজিস্ট্রেশন অনুরোধ আমরা সফলভাবে পেয়েছি।<br>অনুগ্রহপূর্বক কনফার্মেশনের জন্য আপনার ইমেইল চেক করবেন।`;
       elements.modalSuccess.classList.add("active");
       elements.formArtCamp.reset();
       resetArtCampSelectedGroup();
@@ -572,6 +575,7 @@
     // Shared verification inputs inside Movie Screening form
     const container = elements.formMovieScreening.querySelector(".payment-component-container");
     const paymentMethod = container.querySelector(".js-payment-method").value;
+    const paymentNumber = container.querySelector(".js-payment-number").value.trim();
     const trxId = container.querySelector(".js-trx-id").value.trim();
 
     if (!name) return showToast("অনুগ্রহ করে আপনার নাম লিখুন।", "error");
@@ -585,6 +589,7 @@
     if (session === "Other" && !sessionOther) {
       return showToast("অনুগ্রহ করে সেশন উল্লেখ করুন।", "error");
     }
+    if (!paymentNumber) return showToast("অনুগ্রহ করে যে নম্বর থেকে টাকা পাঠিয়েছেন সেই পেমেন্ট নম্বরটি দিন।", "error");
     if (!trxId) return showToast("অনুগ্রহ করে পেমেন্ট ট্রানজেকশন আইডি (TrxID) লিখুন।", "error");
 
     const payload = {
@@ -600,13 +605,14 @@
       sessionOther: sessionOther,
       fee: fee,
       paymentMethod: paymentMethod,
+      paymentNumber: paymentNumber,
       transactionId: trxId
     };
 
     submitToBackend(payload, elements.btnSubmitMovieScreening, () => {
-      elements.modalSuccessTitle.textContent = "‘উৎসব’ রেজিস্ট্রেশন সফল!";
-      elements.modalSuccessDesc.textContent =
-        `ধন্যবাদ ${name}! আপনার চলচ্চিত্র প্রদর্শনীর টিকিট বুকিং (ফি: ${fee} টাকা) সফলভাবে সম্পন্ন হয়েছে।`;
+      elements.modalSuccessTitle.textContent = "‘উৎসব’ রেজিস্ট্রেশন সাবমিট হয়েছে!";
+      elements.modalSuccessDesc.innerHTML =
+        `ধন্যবাদ <strong>${name}</strong>! আপনার রেজিস্ট্রেশন অনুরোধ আমরা সফলভাবে পেয়েছি।<br>অনুগ্রহপূর্বক কনফার্মেশনের জন্য আপনার ইমেইল চেক করবেন।`;
       elements.modalSuccess.classList.add("active");
       elements.formMovieScreening.reset();
       elements.msInstitutionOtherGroup.style.display = "none";
