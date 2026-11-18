@@ -477,6 +477,11 @@ body {
   box-shadow: 0 0 0 2px var(--color-primary-border);
 }
 
+.form-control::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.75;
+}
+
 .form-control:read-only,
 .form-control:disabled {
   background-color: var(--color-surface-subtle);

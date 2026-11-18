@@ -149,6 +149,14 @@
               </select>
             </div>
 
+            <!-- DU Registration Number (Conditional for EconDU) -->
+            <div class="form-group" id="ms-du-reg-group" style="display: none;">
+              <label class="form-label" for="ms-du-reg">
+                <span>ঢাবি রেজিস্ট্রেশন নম্বর (DU Reg. No.) *</span>
+              </label>
+              <input type="text" id="ms-du-reg" name="duRegNo" class="form-control" placeholder="যেমন: 2020XXXXXX" />
+            </div>
+
             <!-- Institution Other (Conditional Input) -->
             <div class="form-group" id="ms-institution-other-group" style="display: none;">
               <label class="form-label" for="ms-institution-other">
@@ -187,12 +195,12 @@
               <div>
                 <div class="section-title">পেমেন্ট সংক্রান্ত বিবরণ (Payment Details)</div>
                 <div class="section-desc" id="ms-fee-rule-note">
-                  EconDU এবং [25/26, 24/25, 23/24, 22/23] সেশনের জন্য ৫০ টাকা, অন্যদের জন্য ১০০ টাকা।
+                  প্রতিষ্ঠান ও সেশন নির্বাচন করলে প্রযোজ্য ফি প্রদর্শিত হবে।
                 </div>
               </div>
               <div class="payment-fee-badge">
                 <span class="fee-label">প্রদেয় ফি:</span>
-                <span class="fee-value tabular-nums" id="ms-fee-top-badge">১০০ টাকা</span>
+                <span class="fee-value tabular-nums" id="ms-fee-top-badge" style="color: var(--color-text-muted);">০ টাকা (0 TK)</span>
               </div>
             </div>
 

@@ -29,7 +29,7 @@
   // Application State
   const state = {
     currentUser: null,
-    fee: 100
+    fee: 0
   };
 
   const elements = {
@@ -51,6 +51,8 @@
     msName: document.getElementById("ms-name"),
     msPhone: document.getElementById("ms-phone"),
     msInstitution: document.getElementById("ms-institution"),
+    msDuRegGroup: document.getElementById("ms-du-reg-group"),
+    msDuReg: document.getElementById("ms-du-reg"),
     msInstitutionOtherGroup: document.getElementById("ms-institution-other-group"),
     msInstitutionOther: document.getElementById("ms-institution-other"),
     msSession: document.getElementById("ms-session"),
@@ -120,12 +122,28 @@
 
     // Institution & Session changes
     elements.msInstitution.addEventListener("change", () => {
+      const isEconDU = elements.msInstitution.value === "EconDU";
       const isOther = elements.msInstitution.value === "Other";
+
+      // Toggle DU Reg No for EconDU
+      if (elements.msDuRegGroup) {
+        elements.msDuRegGroup.style.display = isEconDU ? "flex" : "none";
+        elements.msDuReg.required = isEconDU;
+        if (!isEconDU) elements.msDuReg.value = "";
+      }
+
+      // Toggle Other Institution Input
       elements.msInstitutionOtherGroup.style.display = isOther ? "flex" : "none";
       elements.msInstitutionOther.required = isOther;
       if (!isOther) elements.msInstitutionOther.value = "";
+
       calculateMovieFee();
     });
+
+    if (elements.msDuReg) {
+      elements.msDuReg.addEventListener("input", calculateMovieFee);
+    }
+    elements.msInstitutionOther.addEventListener("input", calculateMovieFee);
 
     elements.msSession.addEventListener("change", () => {
       const isOther = elements.msSession.value === "Other";
@@ -134,6 +152,7 @@
       if (!isOther) elements.msSessionOther.value = "";
       calculateMovieFee();
     });
+    elements.msSessionOther.addEventListener("input", calculateMovieFee);
 
     // Form submission
     elements.formMovieScreening.addEventListener("submit", handleMovieScreeningSubmit);
@@ -181,9 +200,37 @@
   }
 
   function calculateMovieFee() {
-    const institution = elements.msInstitution.value;
-    const session = elements.msSession.value;
+    const institution = elements.msInstitution ? elements.msInstitution.value : "";
+    const session = elements.msSession ? elements.msSession.value : "";
+    const institutionOther = elements.msInstitutionOther ? elements.msInstitutionOther.value.trim() : "";
+    const sessionOther = elements.msSessionOther ? elements.msSessionOther.value.trim() : "";
+    const duReg = elements.msDuReg ? elements.msDuReg.value.trim() : "";
 
+    // 1. Both institution and session must be selected
+    if (!institution || !session) {
+      setZeroFee("প্রতিষ্ঠান ও সেশন নির্বাচন করলে প্রযোজ্য ফি প্রদর্শিত হবে।");
+      return;
+    }
+
+    // 2. If institution is Other, institutionOther must be provided
+    if (institution === "Other" && !institutionOther) {
+      setZeroFee("প্রতিষ্ঠানের নাম লিখলে প্রযোজ্য ফি প্রদর্শিত হবে।");
+      return;
+    }
+
+    // 3. If institution is EconDU, DU Reg. No. must be provided
+    if (institution === "EconDU" && !duReg) {
+      setZeroFee("ঢাবি রেজিস্ট্রেশন নম্বর লিখলে প্রযোজ্য ফি প্রদর্শিত হবে।");
+      return;
+    }
+
+    // 4. If session is Other, sessionOther must be provided
+    if (session === "Other" && !sessionOther) {
+      setZeroFee("সেশন উল্লেখ করলে প্রযোজ্য ফি প্রদর্শিত হবে।");
+      return;
+    }
+
+    // When all required fields are provided:
     const validEconSessions = ["25/26", "24/25", "23/24", "22/23"];
     const isEconDuEligible = institution === "EconDU" && validEconSessions.includes(session);
 
@@ -204,11 +251,19 @@
       if (fee === 50) {
         elements.msFeeRuleNote.textContent = "প্রযোজ্য ছাড়: EconDU সেশন ভিত্তিক রেট (৫০ টাকা)";
       } else {
-        elements.msFeeRuleNote.textContent =
-          institution || session
-            ? "সাধারণ রেট: ১০০ টাকা প্রযোজ্য"
-            : "EconDU এবং [25/26, 24/25, 23/24, 22/23] সেশনের জন্য ৫০ টাকা, অন্যদের জন্য ১০০ টাকা।";
+        elements.msFeeRuleNote.textContent = "সাধারণ রেট: ১০০ টাকা প্রযোজ্য";
       }
+    }
+  }
+
+  function setZeroFee(noteText) {
+    state.fee = 0;
+    if (elements.msFeeTopBadge) {
+      elements.msFeeTopBadge.textContent = "০ টাকা (0 TK)";
+      elements.msFeeTopBadge.style.color = "var(--color-text-muted)";
+    }
+    if (elements.msFeeRuleNote) {
+      elements.msFeeRuleNote.textContent = noteText;
     }
   }
 
@@ -226,6 +281,7 @@
     const phone = elements.msPhone.value.trim();
     const institution = elements.msInstitution.value;
     const institutionOther = elements.msInstitutionOther.value.trim();
+    const duRegNo = elements.msDuReg ? elements.msDuReg.value.trim() : "";
     const session = elements.msSession.value;
     const sessionOther = elements.msSessionOther.value.trim();
     const fee = state.fee;
@@ -236,12 +292,18 @@
     if (!name) return showToast("অনুগ্রহ করে আপনার নাম লিখুন।", "error");
     if (!phone) return showToast("অনুগ্রহ করে ফোন নম্বর লিখুন।", "error");
     if (!institution) return showToast("অনুগ্রহ করে প্রতিষ্ঠান নির্বাচন করুন।", "error");
+    if (institution === "EconDU" && !duRegNo) {
+      return showToast("অনুগ্রহ করে আপনার ঢাবি রেজিস্ট্রেশন নম্বর লিখুন।", "error");
+    }
     if (institution === "Other" && !institutionOther) {
       return showToast("অনুগ্রহ করে প্রতিষ্ঠানের নাম নির্দিষ্ট করুন।", "error");
     }
     if (!session) return showToast("অনুগ্রহ করে সেশন নির্বাচন করুন।", "error");
     if (session === "Other" && !sessionOther) {
       return showToast("অনুগ্রহ করে সেশন উল্লেখ করুন।", "error");
+    }
+    if (fee === 0) {
+      return showToast("অনুগ্রহ করে প্রয়োজনীয় তথ্য পূরণ করে ফি নিশ্চিত করুন।", "error");
     }
     if (!paymentNumber) return showToast("অনুগ্রহ করে প্রেরকের পেমেন্ট নম্বরটি দিন।", "error");
     if (!trxId) return showToast("অনুগ্রহ করে ট্রানজেকশন আইডি (TrxID) লিখুন।", "error");
@@ -255,6 +317,7 @@
       phoneNumber: phone,
       institution: institution,
       institutionOther: institutionOther,
+      duRegNo: duRegNo,
       session: session,
       sessionOther: sessionOther,
       fee: fee,
@@ -278,6 +341,7 @@
           elements.successUserName.textContent = name;
           elements.modalSuccess.classList.add("active");
           elements.formMovieScreening.reset();
+          if (elements.msDuRegGroup) elements.msDuRegGroup.style.display = "none";
           elements.msInstitutionOtherGroup.style.display = "none";
           elements.msSessionOtherGroup.style.display = "none";
           calculateMovieFee();
