@@ -115,7 +115,7 @@
 
         <div class="form-title-group">
           <h2>'উৎসব' (Movie Screening) বুকিং ফর্ম</h2>
-          <p>আপনার তথ্য, ডিপার্টমেন্ট ও সেশন অনুযায়ী ফি স্বয়ংক্রিয়ভাবে নির্ধারিত হবে।</p>
+          <p>আপনার তথ্য, ডিপার্টমেন্ট ও সেশন অনুযায়ী প্রযোজ্য ফি স্বয়ংক্রিয়ভাবে নির্ধারিত হবে।</p>
         </div>
 
         <form id="form-movie-screening" novalidate>
@@ -128,24 +128,11 @@
               <input type="text" id="ms-name" name="name" class="form-control" required placeholder="পুরো নাম লিখুন" />
             </div>
 
-            <!-- Gender (পুরুষ, মহিলা, তৃতীয় লিঙ্গ) -->
-            <div class="form-group">
-              <label class="form-label" for="ms-gender">
-                <span>লিঙ্গ (Gender) *</span>
-              </label>
-              <select id="ms-gender" name="gender" class="form-control" required>
-                <option value="">নির্বাচন করুন</option>
-                <option value="পুরুষ">পুরুষ</option>
-                <option value="মহিলা">মহিলা</option>
-                <option value="তৃতীয় লিঙ্গ">তৃতীয় লিঙ্গ</option>
-              </select>
-            </div>
-
             <!-- Phone Number -->
-            <div class="form-group full-width">
+            <div class="form-group">
               <label class="form-label" for="ms-phone">
                 <span>ফোন নম্বর (Phone Number) *</span>
-                <span class="label-sub">নাবালক হলে অভিভাবকের নম্বর (Guardian's if Minor)</span>
+                <span class="label-sub">নাবালক হলে অভিভাবকের নম্বর</span>
               </label>
               <input type="tel" id="ms-phone" name="phoneNumber" class="form-control" required placeholder="01XXXXXXXXX" />
             </div>
@@ -192,30 +179,24 @@
               </label>
               <input type="text" id="ms-session-other" name="sessionOther" class="form-control" placeholder="যেমন: 21/22 বা অন্যান্য" />
             </div>
-
-            <!-- Registration Fee (Auto-filled, Read-only) -->
-            <div class="form-group full-width">
-              <div class="fee-summary-box">
-                <div>
-                  <div class="fee-summary-label">রেজিস্ট্রেশন ফি (Registration Fee)</div>
-                  <div class="fee-summary-note" id="ms-fee-rule-note">
-                    EconDU এবং [25/26, 24/25, 23/24, 22/23] সেশনের জন্য ৫০ টাকা, অন্যদের জন্য ১০০ টাকা।
-                  </div>
-                </div>
-                <div class="fee-summary-val" id="ms-fee-display">১০০ টাকা</div>
-                <input type="hidden" id="ms-fee" name="fee" value="100" />
-              </div>
-            </div>
           </div>
 
-          <!-- Payment Details Section -->
+          <!-- Payment Details Section with Top-Right Fee Badge -->
           <div class="payment-section">
-            <div class="section-title">পেমেন্ট সংক্রান্ত বিবরণ (Payment Details)</div>
-            <div class="section-desc">
-              নিচের ব্যাংক একাউন্ট অথবা MFS নম্বরে নির্ধারিত ফি পাঠিয়ে নিচের তথ্যগুলো পূরণ করুন।
+            <div class="payment-header-flex">
+              <div>
+                <div class="section-title">পেমেন্ট সংক্রান্ত বিবরণ (Payment Details)</div>
+                <div class="section-desc" id="ms-fee-rule-note">
+                  EconDU এবং [25/26, 24/25, 23/24, 22/23] সেশনের জন্য ৫০ টাকা, অন্যদের জন্য ১০০ টাকা।
+                </div>
+              </div>
+              <div class="payment-fee-badge">
+                <span class="fee-label">প্রদেয় ফি:</span>
+                <span class="fee-value tabular-nums" id="ms-fee-top-badge">১০০ টাকা</span>
+              </div>
             </div>
 
-            <div class="payment-grid">
+            <div class="payment-grid-2">
               <!-- Bank Details -->
               <div class="payment-card">
                 <div class="payment-card-title">
@@ -278,14 +259,14 @@
                   </div>
                 </div>
               </div>
+            </div>
 
-              <!-- QR Code Display -->
-              <div class="qr-container">
-                <div class="qr-image-wrapper">
-                  <img src="../bangla-qr.jpg" alt="Bangla QR" onerror="this.onerror=null; this.src='../bangla-qr.png';" />
-                </div>
-                <div class="qr-caption">Bangla QR</div>
+            <!-- Bangla QR Display (Below Bank & MFS, 80-100% larger) -->
+            <div class="qr-large-container">
+              <div class="qr-large-wrapper">
+                <img src="../bangla-qr.jpg" alt="Bangla QR" onerror="this.onerror=null; this.src='../bangla-qr.png';" />
               </div>
+              <div class="qr-large-caption">Bangla QR — যেকোনো ব্যাংক বা MFS অ্যাপ দিয়ে স্ক্যান করে ফি প্রদান করুন</div>
             </div>
 
             <!-- Verification inputs -->
@@ -296,11 +277,11 @@
                     <span>পেমেন্ট মাধ্যম (Payment Method) *</span>
                   </label>
                   <select id="ms-payment-method" class="form-control" required>
-                    <option value="bKash">bKash (বিকাশ)</option>
-                    <option value="Nagad">Nagad (নগদ)</option>
-                    <option value="Rocket">Rocket (রকেট)</option>
-                    <option value="Upay">Upay (উপায়)</option>
-                    <option value="Sonali Bank">Sonali Bank PLC (ব্যাংক ট্রান্সফার)</option>
+                    <option value="bKash">bKash</option>
+                    <option value="Nagad">Nagad</option>
+                    <option value="Rocket">Rocket</option>
+                    <option value="Upay">Upay</option>
+                    <option value="NPSB (ব্যাংক ট্রান্সফার)">NPSB (ব্যাংক ট্রান্সফার)</option>
                   </select>
                 </div>
 

@@ -52,12 +52,11 @@
     // Art Camp Form
     formArtCamp: document.getElementById("form-art-camp"),
     acName: document.getElementById("ac-name"),
-    acGender: document.getElementById("ac-gender"),
     acPhone: document.getElementById("ac-phone"),
     acBirthday: document.getElementById("ac-birthday"),
     acAge: document.getElementById("ac-age"),
     acAgeBadge: document.getElementById("ac-age-badge"),
-    acFee: document.getElementById("ac-fee"),
+    acFeeTopBadge: document.getElementById("ac-fee-top-badge"),
     acGroupHelper: document.getElementById("ac-group-helper"),
     acSelectedGroup: document.getElementById("ac-selected-group"),
     acSelectedMedium: document.getElementById("ac-selected-medium"),
@@ -281,7 +280,9 @@
     elements.acSelectedGroup.value = "";
     elements.acSelectedMedium.value = "";
     elements.acSelectedFee.value = "0";
-    elements.acFee.value = "০ টাকা";
+    if (elements.acFeeTopBadge) {
+      elements.acFeeTopBadge.textContent = "০ টাকা";
+    }
     state.selectedGroup = null;
     state.selectedMedium = null;
     state.selectedFee = 0;
@@ -302,7 +303,9 @@
     elements.acSelectedGroup.value = group;
     elements.acSelectedMedium.value = medium;
     elements.acSelectedFee.value = fee;
-    elements.acFee.value = `${fee.toLocaleString("bn-BD")} টাকা (${fee} TK)`;
+    if (elements.acFeeTopBadge) {
+      elements.acFeeTopBadge.textContent = `${fee.toLocaleString("bn-BD")} টাকা (${fee} TK)`;
+    }
   }
 
   function handleArtCampSubmit(e) {
@@ -316,7 +319,6 @@
     }
 
     const name = elements.acName.value.trim();
-    const gender = elements.acGender.value;
     const phone = elements.acPhone.value.trim();
     const birthday = elements.acBirthday.value;
     const age = state.calculatedAge;
@@ -328,7 +330,6 @@
     const trxId = elements.acTrxId.value.trim();
 
     if (!name) return showToast("অনুগ্রহ করে অংশগ্রহণকারীর নাম লিখুন।", "error");
-    if (!gender) return showToast("অনুগ্রহ করে লিঙ্গ নির্বাচন করুন।", "error");
     if (!phone) return showToast("অনুগ্রহ করে ফোন নম্বর লিখুন।", "error");
     if (!birthday || age === null) return showToast("সঠিক জন্মতারিখ দিন।", "error");
     if (age < 3 || age > 25) return showToast("বয়স ৩ থেকে ২৫ বছরের মধ্যে হতে হবে।", "error");
@@ -341,7 +342,7 @@
       googleEmail: state.currentUser.email,
       googleName: state.currentUser.name,
       name: name,
-      gender: gender,
+      gender: "",
       phoneNumber: phone,
       birthday: birthday,
       age: age,

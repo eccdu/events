@@ -249,6 +249,30 @@ body {
   line-height: 1.5;
 }
 
+/* Hero Banner on Events Bridge Page */
+.hero-banner-wrapper {
+  margin-bottom: 32px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px -4px rgba(0, 90, 126, 0.28), 0 4px 12px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 90, 126, 0.15);
+  background-color: #072a38;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-banner-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -4px rgba(0, 90, 126, 0.35), 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.hero-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
 /* Main Menu View */
 .menu-header {
   margin-bottom: 28px;
@@ -650,17 +674,111 @@ body {
   padding-top: 24px;
 }
 
-.section-title {
-  font-size: 16px;
+.payment-header-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 640px) {
+  .payment-header-flex {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.payment-fee-badge {
+  background-color: var(--color-primary-light);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: 8px 18px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0, 90, 126, 0.1);
+}
+
+.payment-fee-badge .fee-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.payment-fee-badge .fee-value {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: -0.5px;
+}
+
+.payment-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .payment-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Large Center QR Container */
+.qr-large-container {
+  margin-top: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: var(--shadow-subtle);
+}
+
+.qr-large-wrapper {
+  width: 280px;
+  max-width: 100%;
+  background-color: #fff;
+  border: 2px solid var(--color-primary-border);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 90, 126, 0.08);
+}
+
+.qr-large-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.qr-large-caption {
+  font-size: 14px;
   font-weight: 700;
   color: var(--color-primary);
-  margin-bottom: 6px;
+  margin-top: 4px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 4px;
 }
 
 .section-desc {
   font-size: 14px;
   color: var(--color-text-muted);
-  margin-bottom: 18px;
 }
 
 .payment-grid {

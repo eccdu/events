@@ -126,19 +126,6 @@
               <input type="text" id="ac-name" name="name" class="form-control" required placeholder="পুরো নাম লিখুন" />
             </div>
 
-            <!-- Gender (পুরুষ, মহিলা, তৃতীয় লিঙ্গ) -->
-            <div class="form-group">
-              <label class="form-label" for="ac-gender">
-                <span>লিঙ্গ (Gender) *</span>
-              </label>
-              <select id="ac-gender" name="gender" class="form-control" required>
-                <option value="">নির্বাচন করুন</option>
-                <option value="পুরুষ">পুরুষ</option>
-                <option value="মহিলা">মহিলা</option>
-                <option value="তৃতীয় লিঙ্গ">তৃতীয় লিঙ্গ</option>
-              </select>
-            </div>
-
             <!-- Phone Number -->
             <div class="form-group">
               <label class="form-label" for="ac-phone">
@@ -168,16 +155,7 @@
               </div>
             </div>
 
-            <!-- Registration Fee (Auto-filled, Read-only) -->
-            <div class="form-group">
-              <label class="form-label" for="ac-fee">
-                <span>রেজিস্ট্রেশন ফি (Registration Fee)</span>
-                <span class="label-sub">গ্রুপ অনুযায়ী নির্ধারিত</span>
-              </label>
-              <input type="text" id="ac-fee" name="feeDisplay" class="form-control tabular-nums" readonly value="০ টাকা" style="font-weight: 700; color: var(--color-primary);" />
-            </div>
-
-            <!-- Group Selection -->
+            <!-- Group Selection (Full Width) -->
             <div class="form-group full-width">
               <label class="form-label">
                 <span>গ্রুপ নির্বাচন (Select Group) *</span>
@@ -229,12 +207,20 @@
 
           <!-- Payment Details Section -->
           <div class="payment-section">
-            <div class="section-title">পেমেন্ট সংক্রান্ত বিবরণ (Payment Details)</div>
-            <div class="section-desc">
-              নিচের ব্যাংক একাউন্ট অথবা MFS নম্বরে নির্ধারিত ফি পাঠিয়ে নিচের তথ্যগুলো পূরণ করুন।
+            <div class="payment-header-flex">
+              <div>
+                <div class="section-title">পেমেন্ট সংক্রান্ত বিবরণ (Payment Details)</div>
+                <div class="section-desc">
+                  নিচের ব্যাংক একাউন্ট অথবা MFS নম্বরে নির্ধারিত ফি পাঠিয়ে নিচের তথ্যগুলো পূরণ করুন।
+                </div>
+              </div>
+              <div class="payment-fee-badge">
+                <span class="fee-label">প্রদেয় ফি:</span>
+                <span class="fee-value tabular-nums" id="ac-fee-top-badge">০ টাকা</span>
+              </div>
             </div>
 
-            <div class="payment-grid">
+            <div class="payment-grid-2">
               <!-- Bank Details -->
               <div class="payment-card">
                 <div class="payment-card-title">
@@ -297,14 +283,14 @@
                   </div>
                 </div>
               </div>
+            </div>
 
-              <!-- QR Code Display -->
-              <div class="qr-container">
-                <div class="qr-image-wrapper">
-                  <img src="../bangla-qr.jpg" alt="Bangla QR" onerror="this.onerror=null; this.src='../bangla-qr.png';" />
-                </div>
-                <div class="qr-caption">Bangla QR</div>
+            <!-- Bangla QR Display (Below Bank & MFS, 80-100% larger) -->
+            <div class="qr-large-container">
+              <div class="qr-large-wrapper">
+                <img src="../bangla-qr.jpg" alt="Bangla QR" onerror="this.onerror=null; this.src='../bangla-qr.png';" />
               </div>
+              <div class="qr-large-caption">Bangla QR — যেকোনো ব্যাংক বা MFS অ্যাপ দিয়ে স্ক্যান করে ফি প্রদান করুন</div>
             </div>
 
             <!-- Verification inputs -->
@@ -315,11 +301,11 @@
                     <span>পেমেন্ট মাধ্যম (Payment Method) *</span>
                   </label>
                   <select id="ac-payment-method" class="form-control" required>
-                    <option value="bKash">bKash (বিকাশ)</option>
-                    <option value="Nagad">Nagad (নগদ)</option>
-                    <option value="Rocket">Rocket (রকেট)</option>
-                    <option value="Upay">Upay (উপায়)</option>
-                    <option value="Sonali Bank">Sonali Bank PLC (ব্যাংক ট্রান্সফার)</option>
+                    <option value="bKash">bKash</option>
+                    <option value="Nagad">Nagad</option>
+                    <option value="Rocket">Rocket</option>
+                    <option value="Upay">Upay</option>
+                    <option value="NPSB (ব্যাংক ট্রান্সফার)">NPSB (ব্যাংক ট্রান্সফার)</option>
                   </select>
                 </div>
 

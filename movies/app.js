@@ -49,7 +49,6 @@
     // Movie Screening Form
     formMovieScreening: document.getElementById("form-movie-screening"),
     msName: document.getElementById("ms-name"),
-    msGender: document.getElementById("ms-gender"),
     msPhone: document.getElementById("ms-phone"),
     msInstitution: document.getElementById("ms-institution"),
     msInstitutionOtherGroup: document.getElementById("ms-institution-other-group"),
@@ -57,8 +56,7 @@
     msSession: document.getElementById("ms-session"),
     msSessionOtherGroup: document.getElementById("ms-session-other-group"),
     msSessionOther: document.getElementById("ms-session-other"),
-    msFeeDisplay: document.getElementById("ms-fee-display"),
-    msFee: document.getElementById("ms-fee"),
+    msFeeTopBadge: document.getElementById("ms-fee-top-badge"),
     msFeeRuleNote: document.getElementById("ms-fee-rule-note"),
     msPaymentMethod: document.getElementById("ms-payment-method"),
     msPaymentNumber: document.getElementById("ms-payment-number"),
@@ -191,19 +189,26 @@
 
     const fee = isEconDuEligible ? 50 : 100;
     state.fee = fee;
-    elements.msFee.value = fee;
 
-    if (fee === 50) {
-      elements.msFeeDisplay.textContent = "৫০ টাকা (50 TK)";
-      elements.msFeeDisplay.style.color = "var(--color-success)";
-      elements.msFeeRuleNote.textContent = "প্রযোজ্য ছাড়: EconDU সেশন ভিত্তিক রেট (৫০ টাকা)";
-    } else {
-      elements.msFeeDisplay.textContent = "১০০ টাকা (100 TK)";
-      elements.msFeeDisplay.style.color = "var(--color-primary)";
-      elements.msFeeRuleNote.textContent =
-        institution || session
-          ? "সাধারণ রেট: ১০০ টাকা প্রযোজ্য"
-          : "EconDU এবং [25/26, 24/25, 23/24, 22/23] সেশনের জন্য ৫০ টাকা, অন্যদের জন্য ১০০ টাকা।";
+    if (elements.msFeeTopBadge) {
+      if (fee === 50) {
+        elements.msFeeTopBadge.textContent = "৫০ টাকা (50 TK)";
+        elements.msFeeTopBadge.style.color = "var(--color-success)";
+      } else {
+        elements.msFeeTopBadge.textContent = "১০০ টাকা (100 TK)";
+        elements.msFeeTopBadge.style.color = "var(--color-primary)";
+      }
+    }
+
+    if (elements.msFeeRuleNote) {
+      if (fee === 50) {
+        elements.msFeeRuleNote.textContent = "প্রযোজ্য ছাড়: EconDU সেশন ভিত্তিক রেট (৫০ টাকা)";
+      } else {
+        elements.msFeeRuleNote.textContent =
+          institution || session
+            ? "সাধারণ রেট: ১০০ টাকা প্রযোজ্য"
+            : "EconDU এবং [25/26, 24/25, 23/24, 22/23] সেশনের জন্য ৫০ টাকা, অন্যদের জন্য ১০০ টাকা।";
+      }
     }
   }
 
@@ -218,7 +223,6 @@
     }
 
     const name = elements.msName.value.trim();
-    const gender = elements.msGender.value;
     const phone = elements.msPhone.value.trim();
     const institution = elements.msInstitution.value;
     const institutionOther = elements.msInstitutionOther.value.trim();
@@ -230,7 +234,6 @@
     const trxId = elements.msTrxId.value.trim();
 
     if (!name) return showToast("অনুগ্রহ করে আপনার নাম লিখুন।", "error");
-    if (!gender) return showToast("অনুগ্রহ করে লিঙ্গ নির্বাচন করুন।", "error");
     if (!phone) return showToast("অনুগ্রহ করে ফোন নম্বর লিখুন।", "error");
     if (!institution) return showToast("অনুগ্রহ করে প্রতিষ্ঠান নির্বাচন করুন।", "error");
     if (institution === "Other" && !institutionOther) {
@@ -248,7 +251,7 @@
       googleEmail: state.currentUser.email,
       googleName: state.currentUser.name,
       name: name,
-      gender: gender,
+      gender: "",
       phoneNumber: phone,
       institution: institution,
       institutionOther: institutionOther,
