@@ -97,7 +97,6 @@ function doGet(e) {
 function handleArtCampSubmission(data, timestamp) {
   const sheet = getTargetSheet(ART_CAMP_SHEET_ID, ART_CAMP_TAB_NAME, "চিত্রপট_ArtCamp");
 
-  // Ensure headers exist
   const headers = [
     "Timestamp",
     "User Email",
@@ -114,27 +113,28 @@ function handleArtCampSubmission(data, timestamp) {
     "Payment Number",
     "Transaction ID / Ref"
   ];
-  ensureHeaders(sheet, headers);
 
-  // Prepare row
-  const row = [
-    timestamp,
-    data.googleEmail || "",
-    data.googleName || "",
-    data.name || "",
-    data.gender || "",
-    data.phoneNumber ? "'" + data.phoneNumber : "", // prepend quote to preserve phone as text
-    data.birthday || "",
-    data.age !== undefined ? data.age : "",
-    data.group || "",
-    data.medium || "",
-    data.fee || 0,
-    data.paymentMethod || "MFS / Bank",
-    data.paymentNumber ? "'" + data.paymentNumber : "",
-    data.transactionId || ""
-  ];
+  const dataMap = {
+    "Timestamp": timestamp,
+    "User Email": data.googleEmail || "",
+    "Google Account Email": data.googleEmail || "",
+    "User Name": data.googleName || "",
+    "Google Account Name": data.googleName || "",
+    "Participant Name": data.name || "",
+    "Gender": data.gender || "",
+    "Phone (Guardian's if Minor)": data.phoneNumber ? "'" + data.phoneNumber : "",
+    "Phone": data.phoneNumber ? "'" + data.phoneNumber : "",
+    "Birthday": data.birthday || "",
+    "Age (Years)": data.age !== undefined ? data.age : "",
+    "Selected Group": data.group || "",
+    "Medium": data.medium || "",
+    "Fee (TK)": data.fee || 0,
+    "Payment Method": data.paymentMethod || "MFS / Bank",
+    "Payment Number": data.paymentNumber ? "'" + data.paymentNumber : "",
+    "Transaction ID / Ref": data.transactionId || ""
+  };
 
-  sheet.appendRow(row);
+  appendDataToSheet(sheet, headers, dataMap);
 }
 
 /**
@@ -143,7 +143,6 @@ function handleArtCampSubmission(data, timestamp) {
 function handleMovieScreeningSubmission(data, timestamp) {
   const sheet = getTargetSheet(MOVIE_SCREENING_SHEET_ID, MOVIE_SCREENING_TAB_NAME, "উৎসব_MovieScreening");
 
-  // Ensure headers exist
   const headers = [
     "Timestamp",
     "User Email",
@@ -161,26 +160,83 @@ function handleMovieScreeningSubmission(data, timestamp) {
     "Payment Number",
     "Transaction ID / Ref"
   ];
-  ensureHeaders(sheet, headers);
 
-  // Prepare row
-  const row = [
-    timestamp,
-    data.googleEmail || "",
-    data.googleName || "",
-    data.name || "",
-    data.gender || "",
-    data.phoneNumber ? "'" + data.phoneNumber : "",
-    data.institution || "",
-    data.institutionOther || "",
-    data.duRegNo ? "'" + data.duRegNo : "",
-    data.session || "",
-    data.sessionOther || "",
-    data.fee || 0,
-    data.paymentMethod || "MFS / Bank",
-    data.paymentNumber ? "'" + data.paymentNumber : "",
-    data.transactionId || ""
-  ];
+  const dataMap = {
+    "Timestamp": timestamp,
+    "User Email": data.googleEmail || "",
+    "Google Account Email": data.googleEmail || "",
+    "User Name": data.googleName || "",
+    "Google Account Name": data.googleName || "",
+    "Participant Name": data.name || "",
+    "Gender": data.gender || "",
+    "Phone (Guardian's if Minor)": data.phoneNumber ? "'" + data.phoneNumber : "",
+    "Phone": data.phoneNumber ? "'" + data.phoneNumber : "",
+    "Institution": data.institution || "",
+    "Specified Institution": data.institutionOther || "",
+    "DU Reg. No.": data.duRegNo ? "'" + data.duRegNo : "",
+    "Session": data.session || "",
+    "Specified Session": data.sessionOther || "",
+    "Fee (TK)": data.fee || 0,
+    "Payment Method": data.paymentMethod || "MFS / Bank",
+    "Payment Number": data.paymentNumber ? "'" + data.paymentNumber : "",
+    "Transaction ID / Ref": data.transactionId || ""
+  };
+
+  appendDataToSheet(sheet, headers, dataMap);
+}
+
+/**
+ * Safely appends or updates data according to column headers in row 1
+ */
+function appendDataToSheet(sheet, headers, dataMap) {
+  // If sheet is completely empty, initialize with headers
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(headers);
+    const headerRange = sheet.getRange(1, 1, 1, headers.length);
+    headerRange.setFontWeight("bold");
+    headerRange.setBackground("#F1F5F9");
+    headerRange.setFontColor("#0F172A");
+    sheet.setFrozenRows(1);
+  }
+
+  // Read current existing headers in row 1
+  const lastCol = Math.max(sheet.getLastColumn(), 1);
+  let currentHeaders = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+  
+  // Filter out any blank trailing cells
+  let lastNonEmptyIndex = currentHeaders.length;
+  while (lastNonEmptyIndex > 0 && !currentHeaders[lastNonEmptyIndex - 1]) {
+    lastNonEmptyIndex--;
+  }
+  currentHeaders = currentHeaders.slice(0, lastNonEmptyIndex);
+
+  // Check if any expected headers are missing from currentHeaders, and append them
+  headers.forEach(function (h) {
+    const exists = currentHeaders.some(function (existing) {
+      return existing.toString().trim().toLowerCase() === h.trim().toLowerCase();
+    });
+    if (!exists) {
+      const nextCol = currentHeaders.length + 1;
+      const cell = sheet.getRange(1, nextCol);
+      cell.setValue(h);
+      cell.setFontWeight("bold");
+      cell.setBackground("#F1F5F9");
+      cell.setFontColor("#0F172A");
+      currentHeaders.push(h);
+    }
+  });
+
+  // Construct the row corresponding to currentHeaders
+  const row = currentHeaders.map(function (colHeader) {
+    const key = colHeader.toString().trim().toLowerCase();
+    for (const mapKey in dataMap) {
+      if (mapKey.toLowerCase() === key) {
+        const val = dataMap[mapKey];
+        return val !== undefined && val !== null ? val : "";
+      }
+    }
+    return "";
+  });
 
   sheet.appendRow(row);
 }
@@ -224,19 +280,6 @@ function getTargetSheet(spreadsheetId, tabName, fallbackTabName) {
   return sheet;
 }
 
-/**
- * Ensure column headers exist in row 1 with nice styling
- */
-function ensureHeaders(sheet, headers) {
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(headers);
-    const headerRange = sheet.getRange(1, 1, 1, headers.length);
-    headerRange.setFontWeight("bold");
-    headerRange.setBackground("#F1F5F9");
-    headerRange.setFontColor("#0F172A");
-    sheet.setFrozenRows(1);
-  }
-}
 
 /**
  * Helper to return standard JSON HTTP response
