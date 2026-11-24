@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>'উৎসব' (Movie Screening) রেজিস্ট্রেশন | Economics Cultural Club</title>
+  
+  <!-- Fonts: Kalpurush & Hind Siliguri -->
+  <link rel="preconnect" href="https://fonts.maateen.me">
+  <link href="https://fonts.maateen.me/kalpurush/font.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="icon" type="image/png" href="../../ecc-logo.png">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-block">
+        <a href="../../" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+          <img src="../../ecc-logo.png" alt="ECC Logo" class="brand-logo-img" />
+          <div>
+            <div class="brand-title">Economics Cultural Club</div>
+            <div class="brand-subtitle">Department of Economics, University of Dhaka</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- User Account Bar (Shown when authenticated) -->
+      <div id="user-account-bar" class="user-account-bar" style="display: none;">
+        <div class="user-profile">
+          <img id="header-avatar" class="user-avatar" src="" alt="User Avatar" />
+          <div class="user-details">
+            <span id="header-user-name" class="user-name">User Name</span>
+            <span id="header-user-email" class="user-email">user@gmail.com</span>
+          </div>
+        </div>
+        <button type="button" class="btn-signout" id="btn-signout">লগআউট</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+
+    <!-- CLOSED VIEW (Shown if IS_OPEN === false) -->
+    <section id="view-closed" class="view-section" style="display: none;">
+      <div class="auth-container" style="max-width: 520px;">
+        <div style="font-size: 40px; margin-bottom: 12px;">🔒</div>
+        <h2 style="font-size: 24px; color: var(--color-primary); margin-bottom: 8px;">রেজিস্ট্রেশন সমাপ্ত হয়েছে</h2>
+        <p id="closed-message-text" style="font-size: 16px; color: var(--color-text-main); margin-bottom: 24px;">
+          Registration Closed. Thanks for being with us.
+        </p>
+        <a href="../../" class="btn btn-primary btn-full" style="text-decoration: none;">
+          &larr; প্রধান মেনুতে ফিরে যান
+        </a>
+      </div>
+    </section>
+
+    <!-- VIEW 1: AUTHENTICATION (EMAIL LOGIN) -->
+    <section id="view-auth" class="view-section active">
+      <div class="auth-container">
+        <div class="auth-header">
+          <div class="auth-logo-wrapper">
+            <img src="../../ecc-logo.png" alt="ECC Logo" class="auth-logo-img" />
+          </div>
+          <span class="event-tag" style="margin-bottom: 10px;">Movie Screening Booking</span>
+          <h1>ইমেইল দিয়ে লগ ইন করুন</h1>
+          <p>'উৎসব' চলচ্চিত্র প্রদর্শনী রেজিস্ট্রেশনের জন্য আপনার নাম ও ইমেইল প্রদান করুন।</p>
+        </div>
+
+        <form id="form-auth-login" novalidate style="margin-top: 16px; text-align: left;">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="auth-input-name">
+              <span>আপনার পূর্ণ নাম (Full Name) *</span>
+            </label>
+            <input type="text" id="auth-input-name" class="form-control" required placeholder="উদাহরণ: তানভীর হোসেন" />
+          </div>
+
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label class="form-label" for="auth-input-email">
+              <span>ইমেইল এড্রেস (Email Address) *</span>
+            </label>
+            <input type="email" id="auth-input-email" class="form-control" required placeholder="your.name@gmail.com" />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">
+            লগইন করে ফর্মে প্রবেশ করুন &rarr;
+          </button>
+        </form>
+
+        <div style="margin-top: 20px; border-top: 1px solid var(--color-border); padding-top: 16px;">
+          <a href="../../" class="btn-back" style="text-decoration: none; font-size: 13px; width: 100%; justify-content: center;">
+            &larr; প্রধান মেনুতে ফিরে যান
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: FORM - 'উৎসব' (Movie Screening) -->
+    <section id="view-form" class="view-section">
+      <div class="form-card">
+        <div class="form-top-nav">
+          <a href="../../" class="btn-back" style="text-decoration: none;">
+            &larr; প্রধান মেনুতে ফিরে যান
+          </a>
+          <span class="event-tag">
+            Movie Screening Booking
+          </span>
+        </div>
+
+        <div class="form-title-group">
+          <h2>'উৎসব' (Movie Screening) বুকিং ফর্ম</h2>
+          <p>আপনার তথ্য, ডিপার্টমেন্ট ও সেশন অনুযায়ী প্রযোজ্য ফি স্বয়ংক্রিয়ভাবে নির্ধারিত হবে।</p>
+        </div>
+
+        <form id="form-movie-screening" novalidate>
+          <div class="form-grid form-grid-2">
+            <!-- Name -->
+            <div class="form-group">
+              <label class="form-label" for="ms-name">
+                <span>নাম (Full Name) *</span>
+              </label>
+              <input type="text" id="ms-name" name="name" class="form-control" required placeholder="পুরো নাম লিখুন" />
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+              <label class="form-label" for="ms-phone">
+                <span>ফোন নম্বর (Phone Number) *</span>
+                <span class="label-sub">নাবালক হলে অভিভাবকের নম্বর</span>
+              </label>
+              <input type="tel" id="ms-phone" name="phoneNumber" class="form-control" required placeholder="01XXXXXXXXX" />
+            </div>
+
+            <!-- Institution Dropdown -->
+            <div class="form-group">
+              <label class="form-label" for="ms-institution">
+                <span>প্রতিষ্ঠান / বিভাগ (Institution) *</span>
+              </label>
+              <select id="ms-institution" name="institution" class="form-control" required>
+                <option value="">নির্বাচন করুন</option>
+                <option value="EconDU">EconDU (Department of Economics, DU)</option>
+                <option value="Other">অন্যান্য (Other)</option>
+              </select>
+            </div>
+
+            <!-- DU Registration Number (Conditional for EconDU) -->
+            <div class="form-group" id="ms-du-reg-group" style="display: none;">
+              <label class="form-label" for="ms-du-reg">
+                <span>ঢাবি রেজিস্ট্রেশন নম্বর (DU Reg. No.) *</span>
+              </label>
+              <input type="text" id="ms-du-reg" name="duRegNo" class="form-control" placeholder="যেমন: 2020XXXXXX" />
+            </div>
+
+            <!-- Institution Other (Conditional Input) -->
+            <div class="form-group" id="ms-institution-other-group" style="display: none;">
+              <label class="form-label" for="ms-institution-other">
+                <span>প্রতিষ্ঠানের নাম লিখুন (Specify Institution) *</span>
+              </label>
+              <input type="text" id="ms-institution-other" name="institutionOther" class="form-control" placeholder="আপনার প্রতিষ্ঠান বা বিভাগের নাম" />
+            </div>
+
+            <!-- Session Dropdown -->
+            <div class="form-group">
+              <label class="form-label" for="ms-session">
+                <span>সেশন (Session) *</span>
+              </label>
+              <select id="ms-session" name="session" class="form-control" required>
+                <option value="">নির্বাচন করুন</option>
+                <option value="25/26">25/26</option>
+                <option value="24/25">24/25</option>
+                <option value="23/24">23/24</option>
+                <option value="22/23">22/23</option>
+                <option value="Other">অন্যান্য (Other)</option>
+              </select>
+            </div>
+
+            <!-- Session Other (Conditional Input) -->
+            <div class="form-group" id="ms-session-other-group" style="display: none;">
+              <label class="form-label" for="ms-session-other">
+                <span>সেশন উল্লেখ করুন (Specify Session) *</span>
+              </label>
+              <input type="text" id="ms-session-other" name="sessionOther" class="form-control" placeholder="যেমন: 21/22 বা অন্যান্য" />
+            </div>
+          </div>
+
+          <!-- Payment Details Section with Top-Right Fee Badge -->
+          <div class="payment-section">
+            <div class="payment-header-flex">
+              <div>
+                <div class="section-title">পেমেন্ট সংক্রান্ত বিবরণ (Payment Details)</div>
+                <div class="section-desc" id="ms-fee-rule-note">
+                  প্রতিষ্ঠান ও সেশন নির্বাচন করলে প্রযোজ্য ফি প্রদর্শিত হবে।
+                </div>
+              </div>
+              <div class="payment-fee-badge">
+                <span class="fee-label">প্রদেয় ফি:</span>
+                <span class="fee-value tabular-nums" id="ms-fee-top-badge" style="color: var(--color-text-muted);">০ টাকা (0 TK)</span>
+              </div>
+            </div>
+
+            <div class="payment-grid-2">
+              <!-- Bank Details -->
+              <div class="payment-card">
+                <div class="payment-card-title">
+                  <span>ব্যাংক একাউন্ট বিবরণ (Bank)</span>
+                </div>
+                <div class="payment-details-list">
+                  <div class="payment-row">
+                    <span>Account Name:</span>
+                    <span>Economics Cultural Club</span>
+                  </div>
+                  <div class="payment-row">
+                    <span>Account No:</span>
+                    <span>
+                      <button type="button" class="copy-pill js-copy-btn" data-copy="4405702001651" title="কপি করুন">
+                        4405702001651 📋
+                      </button>
+                    </span>
+                  </div>
+                  <div class="payment-row">
+                    <span>Bank Name:</span>
+                    <span>Sonali Bank PLC</span>
+                  </div>
+                  <div class="payment-row">
+                    <span>Branch:</span>
+                    <span>DU Campus Corporate</span>
+                  </div>
+                  <div class="payment-row">
+                    <span>Routing No:</span>
+                    <span>200271750</span>
+                  </div>
+                  <div class="payment-row">
+                    <span>SWIFT / BIC:</span>
+                    <span>BSONBDDH</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- MFS Details -->
+              <div class="payment-card">
+                <div class="payment-card-title">
+                  <span>মোবাইল ব্যাংকিং (MFS)</span>
+                </div>
+                <div class="payment-details-list">
+                  <div class="payment-row">
+                    <span>MFS Providers:</span>
+                    <span>bKash / Nagad / Rocket / Upay</span>
+                  </div>
+                  <div class="payment-row" style="margin-top: 4px;">
+                    <span>MFS Number:</span>
+                    <span>
+                      <button type="button" class="copy-pill js-copy-btn" data-copy="01753932582" title="কপি করুন">
+                        01753932582 📋
+                      </button>
+                    </span>
+                  </div>
+                  <div class="payment-row" style="margin-top: 6px;">
+                    <span style="font-size: 12px; color: var(--color-text-muted);">
+                      * সেন্ড মানি বা ক্যাশ-ইন সম্পন্ন করে নিচে পেমেন্ট নম্বর ও ট্রানজেকশন আইডি দিন।
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bangla QR Display (Below Bank & MFS, 80-100% larger) -->
+            <div class="qr-large-container">
+              <div class="qr-large-wrapper">
+                <img src="../../bangla-qr.jpg" alt="Bangla QR" onerror="this.onerror=null; this.src='../../bangla-qr.png';" />
+              </div>
+              <div class="qr-large-caption">Bangla QR — যেকোনো ব্যাংক বা MFS অ্যাপ দিয়ে স্ক্যান করে ফি প্রদান করুন</div>
+            </div>
+
+            <!-- Verification inputs -->
+            <div class="verification-box">
+              <div class="form-grid form-grid-3">
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>পেমেন্ট মাধ্যম (Payment Method) *</span>
+                  </label>
+                  <select id="ms-payment-method" class="form-control" required>
+                    <option value="bKash">bKash</option>
+                    <option value="Nagad">Nagad</option>
+                    <option value="Rocket">Rocket</option>
+                    <option value="Upay">Upay</option>
+                    <option value="NPSB (ব্যাংক ট্রান্সফার)">NPSB (ব্যাংক ট্রান্সফার)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>পেমেন্ট নম্বর (Payment Number) *</span>
+                  </label>
+                  <input type="text" id="ms-payment-number" class="form-control" required placeholder="01XXXXXXXXX বা একাউন্ট নম্বর" />
+                  <span class="label-sub" style="margin-top: 2px;">(যেই একাউন্ট থেকে টাকা পাঠিয়েছেন)</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <span>ট্রানজেকশন আইডি (TrxID) *</span>
+                  </label>
+                  <input type="text" id="ms-trx-id" class="form-control" required placeholder="টাকা পাঠানোর পর প্রাপ্ত TrxID" />
+                  <span class="label-sub" style="margin-top: 2px;">(যেমন: BKA892XKZ বা স্লিপ নম্বর)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div style="margin-top: 24px;">
+            <button type="submit" class="btn btn-primary btn-full" id="btn-submit-movie-screening">
+              <span class="btn-text">'উৎসব' রেজিস্ট্রেশন সাবমিট করুন</span>
+              <span class="btn-spinner" style="display: none;">প্রসেস হচ্ছে...</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Success Modal -->
+  <div id="modal-success" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-icon-success">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h3 id="modal-success-title">‘উৎসব’ রেজিস্ট্রেশন সাবমিট হয়েছে!</h3>
+      <p id="modal-success-desc">
+        ধন্যবাদ <strong id="success-user-name"></strong>! আপনার রেজিস্ট্রেশন অনুরোধ আমরা সফলভাবে পেয়েছি।<br>
+        অনুগ্রহপূর্বক কনফার্মেশনের জন্য আপনার ইমেইল চেক করবেন।
+      </p>
+      <a href="../../" class="btn btn-primary btn-full" style="text-decoration: none;">
+        প্রধান মেনুতে ফিরে যান
+      </a>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div>&copy; 2026 Economics Cultural Club, Department of Economics, University of Dhaka. All rights reserved.</div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
