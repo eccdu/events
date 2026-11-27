@@ -63,8 +63,7 @@
     acSelectedFee: document.getElementById("ac-selected-fee"),
     groupCards: {
       kuri: document.getElementById("group-card-kuri"),
-      koliPaper: document.getElementById("group-card-koli-paper"),
-      koliCanvas: document.getElementById("group-card-koli-canvas")
+      koliPaper: document.getElementById("group-card-koli-paper")
     },
     acPaymentMethod: document.getElementById("ac-payment-method"),
     acPaymentNumber: document.getElementById("ac-payment-number"),
@@ -243,11 +242,10 @@
 
     toggleGroupCard(elements.groupCards.kuri, isKuriEligible);
     toggleGroupCard(elements.groupCards.koliPaper, isKoliEligible);
-    toggleGroupCard(elements.groupCards.koliCanvas, isKoliEligible);
 
     elements.acGroupHelper.textContent = isKuriEligible
       ? "আপনার বয়সের জন্য 'কুঁড়ি' গ্রুপ প্রযোজ্য"
-      : "আপনার বয়সের জন্য 'কলি' গ্রুপসমূহ প্রযোজ্য";
+      : "আপনার বয়সের জন্য 'কলি' গ্রুপ প্রযোজ্য";
 
     const activeCard = document.querySelector(".group-card.selected");
     if (activeCard && activeCard.classList.contains("disabled")) {
